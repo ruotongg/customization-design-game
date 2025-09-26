@@ -1,0 +1,660 @@
+/* 响应式设计 - 适配手机、平板、电脑 */
+
+/* Grid Layout for Route Map */
+.route-map-grid {
+  display: grid;
+  grid-template-columns: 1fr 35%;
+  gap: 24px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Responsive Grid Layout */
+@media (max-width: 1200px) {
+  .route-map-grid {
+    grid-template-columns: 1fr 40%;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .route-map-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .route-map-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .route-map-grid {
+    gap: 12px;
+    padding: 0 12px;
+  }
+}
+
+/* 可重用描述框样式 */
+.description-box {
+  background: #f3e5f5;
+  border: 1px solid #ce93d8;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.description-box h3 {
+  margin-top: 0;
+  color: #7b1fa2;
+  font-size: 16px;
+}
+
+.description-box p {
+  margin: 0;
+  color: #424242;
+  font-size: 14px;
+}
+
+/* 全局样式 */
+body {
+  background: #f8fafc;
+  margin: 0;
+  padding: 20px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* 基础样式 */
+.container {
+  max-width: 90%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  background: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  min-width: 320px; /* 最小宽度确保在小屏幕上可用 */
+}
+
+/* 手机设备 (最大宽度 768px) */
+@media (max-width: 768px) {
+  .container {
+    padding: 8px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    margin: 4px;
+  }
+  
+  /* 路线图设计器在手机上垂直布局 */
+  .route-map-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    min-width: 280px !important;
+  }
+  
+  .route-map-form {
+    min-width: 100% !important;
+    order: 1;
+    grid-template-columns: 1fr !important;
+  }
+  
+  .route-map-canvas {
+    order: 2;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 200px !important;
+    max-height: 60vh !important; /* 手机端最大高度为视口60% */
+    max-width: 100% !important;
+    aspect-ratio: 4/1 !important;
+  }
+  
+  /* 画布在手机上自适应 */
+  .konvajs-content {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* 悬浮按钮在手机上位置调整 */
+  .floating-save-btn {
+    position: fixed !important;
+    right: 10px !important;
+    bottom: 20px !important;
+    top: auto !important;
+    transform: none !important;
+  }
+  
+  /* 导航按钮在手机上调整 */
+  .navigation-buttons {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .navigation-buttons button {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  
+  .current-section {
+    order: -1;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  
+  /* 路线图在手机上调整 */
+  .route-map-form {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    min-width: 100%;
+  }
+  
+  .route-map-canvas {
+    min-height: 200px;
+    max-height: 70vh; /* 平板端最大高度为视口70% */
+    aspect-ratio: 4/1;
+    width: 100%;
+  }
+  
+  /* 路线图工具在手机上调整 */
+  .route-map-canvas-container {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .route-map-tools {
+    min-width: auto;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* 平板设备 (宽度 769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 12px;
+  }
+  
+  /* 路线图在平板上调整 */
+  .route-map-form {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    min-width: 100%;
+  }
+  
+  .route-map-canvas {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+    max-width: 100%;
+    aspect-ratio: 4/1;
+  }
+  
+  .route-map-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  
+  .route-map-canvas-container {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important;
+  }
+}
+
+/* 电脑设备 (最小宽度 1025px) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: 850px;
+    padding: 20px;
+  }
+  
+  .route-map-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .route-map-canvas {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    max-height: 80vh; /* 桌面端最大高度为视口80% */
+    max-width: 100%;
+    aspect-ratio: 4/1;
+  }
+  
+  .route-map-canvas-container {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 16px !important;
+  }
+}
+
+/* 表单字段响应式 */
+.row {
+  margin-bottom: 16px;
+  width: 100%;
+  min-width: 280px; /* 最小宽度确保表单可用性 */
+}
+
+.row label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.row input,
+.row textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* 按钮样式 */
+.btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+/* 导航按钮样式 */
+.navigation-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.navigation-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navigation-buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.current-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.btn:hover {
+  background: #3730a3;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* 清除按钮特殊样式 */
+.btn.clear-btn {
+  background: #dc2626;
+}
+
+.btn.clear-btn:hover {
+  background: #b91c1c;
+}
+
+/* 信息提示样式 */
+.ok {
+  color: #059669;
+  background: #f0fdf4;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+  margin: 8px 0;
+}
+
+.err {
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #fecaca;
+  margin: 8px 0;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 16px 0;
+}
+
+/* 路线图容器样式 */
+.route-map-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 320px; /* 最小宽度确保响应式导航 */
+}
+
+/* 路线图表单区域 */
+.route-map-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  min-width: 280px; /* 最小宽度确保表单可用性 */
+}
+
+/* 路线图画布区域 */
+.route-map-canvas {
+  min-height: 200px;
+  max-height: 80vh; /* 最大高度为视口高度的80% */
+  overflow: hidden;
+  background: #fafafa;
+  scroll-behavior: auto;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4/1; /* 4:1 宽高比 */
+  min-width: 280px; /* 最小宽度 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* 路线图画布和工具布局 */
+.route-map-canvas-container {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 320px; /* 最小宽度确保布局可用性 */
+}
+
+.route-map-tools {
+  min-width: 150px;
+  max-width: 200px;
+  width: 20%; /* 工具区域占20%宽度 */
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 防止路线图组件导致页面滚动 */
+.route-map-container {
+  scroll-behavior: auto;
+}
+
+.route-map-container * {
+  scroll-behavior: auto;
+}
+
+/* 防止自动聚焦到第一个输入框 */
+.route-map-container textarea {
+  outline: none;
+}
+
+.route-map-container textarea:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+/* 防止组件重新渲染时自动聚焦 */
+.route-map-container input:focus,
+.route-map-container textarea:focus {
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Chess Game Section 响应式样式 */
+.chess-game-section {
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chess-game-grid {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chess-game-item {
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chess-game-description {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Activity Revisit Section 响应式样式 */
+.activity-revisit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.activity-revisit-item {
+  width: 100%;
+  min-width: 280px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.activity-revisit-description {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.activity-revisit-navigation {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.activity-revisit-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
+}
+
+.activity-revisit-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  min-width: 140px;
+  max-width: 100%;
+  width: auto;
+  flex: 1 1 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 手机端响应式调整 */
+@media (max-width: 768px) {
+  .chess-game-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .activity-revisit-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .activity-revisit-button {
+    width: 100%;
+    min-width: auto;
+    flex: none;
+  }
+  
+  .chess-game-description,
+  .activity-revisit-description,
+  .activity-revisit-navigation {
+    padding: 12px;
+  }
+}
+
+/* 平板端响应式调整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .chess-game-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .activity-revisit-buttons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Four Grid Story Component 样式 */
+.four-grid-story-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+  gap: 2px !important;
+  width: 100% !important;
+  height: auto !important;
+  background: #ffffff !important;
+  border: 2px solid #e9ecef !important;
+  border-radius: 16px !important;
+  padding: 8px !important;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08) !important;
+  box-sizing: border-box !important;
+}
+
+.four-grid-story-grid * {
+  box-sizing: border-box !important;
+}
+
+/* Checkers Board 样式 */
+.checkers-board {
+  display: grid;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background: #8B4513;
+  user-select: none;
+  outline: none;
+}
+
+.checkers-board:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+.checkers-square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+}
+
+/* 手机端 Checkers Board 调整 */
+@media (max-width: 768px) {
+  .checkers-board {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .checkers-square {
+    font-size: 12px;
+  }
+}
+
+/* 平板端 Checkers Board 调整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .checkers-board {
+    max-width: 100%;
+    height: auto;
+  }
+}

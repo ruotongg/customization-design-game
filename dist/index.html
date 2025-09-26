@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"/>
+    <title>多步表单（本地保存 & 导入导出）</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      .container { max-width: 720px; margin: 32px auto; padding: 0 16px; }
+      .row { margin: 12px 0; }
+      .btn { padding: 8px 12px; border: 1px solid #bbb; border-radius: 8px; background: #fff; cursor: pointer; }
+      .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+      input, textarea { width: 100%; padding: 8px; border: 1px solid #bbb; border-radius: 8px; }
+      .badge { display:inline-block; background:#eef; color:#334; border:1px solid #ccd; padding:2px 8px; border-radius:999px; font-size:12px; }
+      .muted { color:#666; font-size: 12px; }
+      .err { color:#b00020; }
+      .ok { color:#0b6b00; }
+      .steps { display:flex; gap:8px; margin: 8px 0 16px; }
+      .step { padding:4px 10px; border:1px solid #ddd; border-radius:999px; font-size:12px; }
+      .step.active { background:#222; color:#fff; border-color:#222; }
+      
+      @keyframes fadeInOut {
+        0% { opacity: 0; transform: translateY(10px); }
+        20% { opacity: 1; transform: translateY(0); }
+        80% { opacity: 1; transform: translateY(0); }
+        100% { opacity: 0; transform: translateY(-10px); }
+      }
+    </style>
+    <script type="module" crossorigin src="./assets/index-Cl8sM7y3.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-YXISsxtf.css">
+  </head>
+  <body>
+    <div id="root"><!-- React mounts here --></div>
+  </body>
+</html>
